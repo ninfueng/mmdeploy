@@ -82,9 +82,12 @@ inline Palette Palette::get(int n) {
   std::vector<cv::Point3f> centers(n);
   cv::Mat c_mat(centers, false);
   cv::Mat s_mat(samples, false);
-  // This is too long version?
+  // Not works too new
   // c_mat = c_mat.reshape(1, {n, 3});  // CV_32FC3 -> CV_32FC1 for cv::kmeans output
-  c_mat = c_mat.reshape(1, n, 3);  // CV_32FC3 -> CV_32FC1 for cv::kmeans output
+  // Not works too very new
+  // c_mat = c_mat.reshape(1, n, 3);  // CV_32FC3 -> CV_32FC1 for cv::kmeans output
+  // Try this version!
+  c_mat = c_mat.reshape(1, std::vector<int>{n, 3});
   cv::kmeans(s_mat, n, indices, cv::TermCriteria(cv::TermCriteria::Type::COUNT, 10, 0), 1,
              cv::KMEANS_PP_CENTERS, c_mat);
   Palette p;
