@@ -87,7 +87,7 @@ inline Palette Palette::get(int n) {
   // Not works too very new
   // c_mat = c_mat.reshape(1, n, 3);  // CV_32FC3 -> CV_32FC1 for cv::kmeans output
   // Try this version!
-  c_mat = c_mat.reshape(1, std::vector<int>{n, 3});
+  c_mat = c_mat.reshape(1, std::vector<int>{n, 3}.data());
   cv::kmeans(s_mat, n, indices, cv::TermCriteria(cv::TermCriteria::Type::COUNT, 10, 0), 1,
              cv::KMEANS_PP_CENTERS, c_mat);
   Palette p;
